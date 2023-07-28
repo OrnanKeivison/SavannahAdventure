@@ -7,14 +7,14 @@ class Elephant(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
-
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('data/image/elephant.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
         self.rect = self.image.get_rect()
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} bramindo')
+        print(f'{self.name} bramindo')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -31,6 +31,7 @@ class Giraffe(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
+        pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load('data/image/giraffe.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
@@ -38,7 +39,7 @@ class Giraffe(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} zumbindo')
+        print(f'{self.name} zumbindo')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -55,6 +56,7 @@ class Lion(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
+        pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load('data/image/lion.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
@@ -62,7 +64,7 @@ class Lion(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} está rugindo')
+        print(f'{self.name} está rugindo')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -79,6 +81,7 @@ class Monkey(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
+        pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load('data/image/monkey.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
@@ -86,7 +89,7 @@ class Monkey(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} guinchando')
+        print(f'{self.name} guinchando')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -103,6 +106,7 @@ class Rhino(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
+        pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load('data/image/rhino.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
@@ -110,7 +114,7 @@ class Rhino(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} grunhindo')
+        print(f'{self.name} grunhindo')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -127,14 +131,15 @@ class Zebra(Animal, Sprite):
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, weight, posX, posY):
         super().__init__(name, color, gender, speed, weight, posX, posY)
-
+        pygame.sprite.Sprite.__init__(self)
+        
         self.image = pygame.image.load('data/image/zebra.png') 
         self.image = pygame.transform.scale(self.image, [100,100])
         self.rect = self.image.get_rect()
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'o {self.name} zurrando')
+        print(f'{self.name} zurrando')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)

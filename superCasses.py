@@ -2,7 +2,7 @@
 class Animal:
     #iniciando o construtor com os respectivos atributos
     def __init__(self, name, color, gender, speed, Weight, posX, posY):
-        self.__name = name
+        self.name = name
         self.__color = color
         self.__gender = gender
         self.__speed = int(speed)
@@ -15,7 +15,7 @@ class Animal:
 
     #métodos get's 
     def getName(self):
-        return self.__name
+        return self.name
 
     def getColor(self):
         return self.__color
@@ -40,7 +40,7 @@ class Animal:
 
     #métodos set's
     def setName(self, name):
-        self.__name = name
+        self.name = name
 
     def setColor(self, color):
         self.__color = color
@@ -66,7 +66,7 @@ class Animal:
     #método de impressão das características básicas do animal
     def print_attributes(self):
         print('CARACTERÍSTICAS:')
-        print('nome:',self.__name)
+        print('nome:',self.name)
         print('cor:',self.__color)
         print('sexo:',self.__gender)
         print('velocidade:',self.__speed)
@@ -137,7 +137,7 @@ class Savannah:
 
     #método get
     def getAnimais(self):
-        return self.animais
+        return self.__animais
 
     #método andar
     def andar(self, animal, pos):
@@ -288,4 +288,21 @@ class Savannah:
 
         elif pos == (6, 6):
             animal.setPosX(self.__pos66[0])
-            animal.setPosY(self.__s66[1])
+            animal.setPosY(self.__pos66[1])
+
+    def checar_colisao(self):
+        posicoes = {} #crinado dicionário para armazenar posições
+        for animal in self.__animais: 
+            posicao = (animal.getPosX(), animal.getPosY())  #obtém a posição do animal
+            if posicao in posicoes:
+                posicoes[posicao].append(animal) #adiciona o nome do animal na sua respectiva posição
+            else:
+                posicoes[posicao] = [animal] #cria a novva posição e adiciona o nome do animal
+        
+        #adiciona colisões, se ouver, a lista colisões
+        colisoes = []
+        for posicao, animais in posicoes.items():
+            if len(animais) > 1:
+                colisoes.append((posicao, animais))
+        
+        return colisoes # retorna as colisões
