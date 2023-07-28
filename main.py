@@ -32,8 +32,13 @@ def music():
 
 #definindo os animais
 a1 = Elephant("ella", "cinza", "f", 3, 200, 0, 0)
+a2 = Giraffe("ella", "cinza", "f", 3, 200, 0, 100)
+a3 = Lion("ella", "cinza", "f", 3, 200, 0, 200)
+a4 = Monkey("ella", "cinza", "f", 3, 200, 0, 300)
+a5 = Rhino("ella", "cinza", "f", 3, 200, 0, 400)
+a6 = Zebra("ella", "cinza", "f", 3, 200, 0, 500)
 
-s = Savannah([a1])
+s = Savannah([a1, a2, a3, a4, a5, a6])
 
 posiçoes = [[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6)],  
             [(2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6)], 
@@ -73,39 +78,39 @@ while gameloop:
 
       
     draw()
-    a1.show_on_screen(display)
-    linha = coluna = 0
-    velocidade = 1
-    pos = posiçoes[linha][coluna]
+    for animal in s.getAnimais():
+        animal.show_on_screen(display)
+    # linha = coluna = 0
+    # velocidade = 1
+    # pos = posiçoes[linha][coluna]
 
-    rodada = 0
-    i = 0
-    while i < 20:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                gameloop = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
+    # rodada = 0
+    # i = True
+    # while i:
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+                
+    #             i = False
+    #             gameloop = False
+    #         if event.type == pygame.KEYDOWN:
+    #             if event.key == pygame.K_RIGHT:
 
-                    if i%2 == 0 :
-                        if coluna == 5 or coluna == -1:
-                            coluna -= velocidade
-                            s.andar(a1, (posiçoes[linha][coluna]))
-                        else:
-                            coluna += velocidade
+    #                 # if i%2 == 0 :
+    #                 #     if coluna == 5 or coluna == -1:
+    #                 #         coluna -= velocidade
+    #                 #     else:
+    #                 #         coluna += velocidade
+                        
+    #                 #     s.andar(a1, (posiçoes[linha][coluna]))
                             
-                            s.andar(a1, (posiçoes[linha][coluna]))
+
+    #                 if i%2 == 0 :
+    #                     if linha == 5 or linha == -1:
+    #                         linha -= velocidade
+    #                     else:
+    #                         linha += velocidade
                             
-
-                    else:
-                        if linha == 5 or linha == -1:
-                            linha -= velocidade
-                            s.andar(a1, (posiçoes[linha][coluna]))
-                        else:
-                            linha += velocidade
-                            s.andar(a1, (posiçoes[linha][coluna]))
-
-        i += 1
+    #                     s.andar(a1, (posiçoes[linha][coluna]))
         
 
     fps.tick(30)

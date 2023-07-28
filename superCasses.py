@@ -288,4 +288,4 @@ class Savannah:
 
         elif pos == (6, 6):
             animal.setPosX(self.__pos66[0])
-            animal.setPosY(self.__pos66[1])
+            animal.setPosY(self.__s66[1])
