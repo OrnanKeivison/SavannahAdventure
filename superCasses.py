@@ -79,6 +79,10 @@ class Animal:
     def make_sound(self):
         pass
 
+    def matar(self):
+        self.setPosX(1000000)
+        self.setPosY(1000000)
+
 #classe onde ocorrem as interações dos objetos com o tabuleiro
 class Savannah:
     #iniciando o construtor com o atributo
@@ -289,7 +293,8 @@ class Savannah:
         elif pos == (6, 6):
             animal.setPosX(self.__pos66[0])
             animal.setPosY(self.__pos66[1])
-
+    
+    #método checar colisão
     def checar_colisao(self):
         posicoes = {} #crinado dicionário para armazenar posições
         for animal in self.__animais: 
