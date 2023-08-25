@@ -15,8 +15,12 @@ init = pygame.image.load('data/image/screen_init.png')
 init = pygame.transform.scale(init, (600, 600))
 
 #load image tela de vitória
-win = pygame.image.load('data/image/ganhou.png')
+win = pygame.image.load('data/image/win.png')
 win = pygame.transform.scale(win, (600, 600))
+
+#load image tela de vitória
+over = pygame.image.load('data/image/over.png')
+over = pygame.transform.scale(over, (600, 600))
 
 #função para desenhar o fundo
 def draw():
@@ -71,6 +75,7 @@ def mov_animals():
 #iniciando variaveis
 passe = True
 go = True
+goe = True
 gameloop = True
 
 posicao_jogador = [0, 0]
@@ -108,24 +113,28 @@ while gameloop:
                 posicao_jogador = posiçoes[linha][coluna]
                 s.andar(a3, posicao_jogador)
                 mov_animals()
+                a3.setStamina(a3.getStamina()-10)
 
             if event.key == pygame.K_LEFT:
                 coluna -= 1
                 posicao_jogador = posiçoes[linha][coluna]
                 s.andar(a3, posicao_jogador)
                 mov_animals()
+                a3.setStamina(a3.getStamina()-10)
             
             if event.key == pygame.K_UP:
                 linha -= 1
                 posicao_jogador = posiçoes[linha][coluna]
                 s.andar(a3, posicao_jogador)
                 mov_animals()
+                a3.setStamina(a3.getStamina()-10)
 
             if event.key == pygame.K_DOWN:
                 linha += 1
                 posicao_jogador = posiçoes[linha][coluna]
                 s.andar(a3, posicao_jogador)
                 mov_animals()
+                
                 
     #loop para página inicial
     while passe: 
@@ -163,12 +172,14 @@ while gameloop:
                 animais[0].make_sound()
                 animais[1].make_sound()
                 animais[1].matar() 
+                a3.setWeight(a3.getWeight()+animais[1].getWeight())
                 animais.clear()
                 mortes += 1
             elif animais[1] == a3:
                 animais[0].make_sound()
                 animais[1].make_sound()
                 animais[0].matar()
+                a3.setWeight(a3.getWeight()+animais[0].getWeight())
                 animais.clear()
                 mortes += 1
 
@@ -188,7 +199,20 @@ while gameloop:
                             go = False 
                 fps.tick(60)
                 pygame.display.update()
-
+        
+        if a3.getStamina() <= 0:
+            print('ganhou')
+            a3.matar()
+            while goe: 
+                display.blit(over, (0, 0))
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        gameloop = False
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RIGHT:
+                            goe = False 
+                fps.tick(60)
+                pygame.display.update()
             
 
     
