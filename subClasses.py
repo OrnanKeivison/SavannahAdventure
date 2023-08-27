@@ -89,7 +89,7 @@ class Monkey(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'{self.name}está guinchando')
+        print(f'{self.name} está guinchando')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)
@@ -139,7 +139,7 @@ class Zebra(Animal, Sprite):
 
     #método make_sound específico para o Lion
     def make_sound(self):
-        print(f'{self.name}está zurrando')
+        print(f'{self.name} está zurrando')
         # pygame.mixer.init()
         # roar = pygame.mixer.Sound('data/sunds/lion.wav')
         # roar.play(1)

@@ -11,7 +11,7 @@ class Animal:
         self.__posY = int(posY)
 
         #atributo predefinido
-        self.__stamina = 100
+        self.__stamina = 500
 
     #métodos get's 
     def getName(self):
@@ -79,7 +79,7 @@ class Animal:
     def make_sound(self):
         pass
 
-    def matar(self):
+    def kill(self):
         self.setPosX(1000000)
         self.setPosY(1000000)
 
@@ -144,7 +144,7 @@ class Savannah:
         return self.__animais
 
     #método andar
-    def andar(self, animal, pos):
+    def goTo(self, animal, pos):
         if pos == (1, 1):
             animal.setPosX(self.__pos11[0])
             animal.setPosY(self.__pos11[1])
@@ -295,7 +295,7 @@ class Savannah:
             animal.setPosY(self.__pos66[1])
     
     #método checar colisão
-    def checar_colisao(self):
+    def check_collision(self):
         posicoes = {} #crinado dicionário para armazenar posições
         for animal in self.__animais: 
             posicao = (animal.getPosX(), animal.getPosY())  #obtém a posição do animal

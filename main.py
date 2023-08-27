@@ -31,8 +31,10 @@ def draw():
 #função para iniciar a music
 def music():
     pygame.mixer.init()
-    pygame.mixer.music.load('data/music/music.wav')
+    pygame.mixer.music.load('data/musics/music.wav')
     pygame.mixer.music.play(-1)
+
+music()
 
 #definindo os animais
 a1 = Elephant("ella", "cinza", "f", 3, 200, 0, 0)
@@ -48,29 +50,29 @@ s = Savannah([a1, a2, a3, a4, a5, a6])
 #movimenta animais 
 def mov_animals():
     if a1.getPosX() != 1000000:
-        i = choice(range(0, 6))
+        i = 0
         j = choice(range(0, 6))
-        s.andar(a1, posiçoes[i][j])
+        s.goTo(a1, posiçoes[i][j])
 
     if a2.getPosX() != 1000000:
-        i = choice(range(0, 6))
+        i = 1
         j = choice(range(0, 6))
-        s.andar(a2, posiçoes[i][j])
+        s.goTo(a2, posiçoes[i][j])
 
     if a4.getPosX() != 1000000:
-        i = choice(range(0, 6))
+        i = 3
         j = choice(range(0, 6))
-        s.andar(a4, posiçoes[i][j])
+        s.goTo(a4, posiçoes[i][j])
 
     if a5.getPosX() != 1000000:
-        i = choice(range(0, 6))
+        i = 4
         j = choice(range(0, 6))
-        s.andar(a5, posiçoes[i][j])
+        s.goTo(a5, posiçoes[i][j])
 
     if a6.getPosX() != 1000000:
-        i = choice(range(0, 6))
+        i = 5
         j = choice(range(0, 6))
-        s.andar(a6, posiçoes[i][j])
+        s.goTo(a6, posiçoes[i][j])
 
 #iniciando variaveis
 passe = True
@@ -111,30 +113,30 @@ while gameloop:
             if event.key == pygame.K_RIGHT:
                 coluna += 1
                 posicao_jogador = posiçoes[linha][coluna]
-                s.andar(a3, posicao_jogador)
+                s.goTo(a3, posicao_jogador)
                 mov_animals()
                 a3.setStamina(a3.getStamina()-10)
 
             if event.key == pygame.K_LEFT:
                 coluna -= 1
                 posicao_jogador = posiçoes[linha][coluna]
-                s.andar(a3, posicao_jogador)
+                s.goTo(a3, posicao_jogador)
                 mov_animals()
                 a3.setStamina(a3.getStamina()-10)
             
             if event.key == pygame.K_UP:
                 linha -= 1
                 posicao_jogador = posiçoes[linha][coluna]
-                s.andar(a3, posicao_jogador)
+                s.goTo(a3, posicao_jogador)
                 mov_animals()
                 a3.setStamina(a3.getStamina()-10)
 
             if event.key == pygame.K_DOWN:
                 linha += 1
                 posicao_jogador = posiçoes[linha][coluna]
-                s.andar(a3, posicao_jogador)
+                s.goTo(a3, posicao_jogador)
                 mov_animals()
-                
+                a3.setStamina(a3.getStamina()-10)
                 
     #loop para página inicial
     while passe: 
@@ -154,16 +156,18 @@ while gameloop:
     #desenha os animais no tabuleiro 
     a1.show_on_screen(display)
     a2.show_on_screen(display)
-    a3.show_on_screen(display)
     a4.show_on_screen(display)
     a5.show_on_screen(display)
     a6.show_on_screen(display)
-    
+    a3.show_on_screen(display)    
+
+    #movimenta os animais pela primeira vez
     if move_um == 1:
         mov_animals()
         move_um = 2
-
-    colisoes = s.checar_colisao()
+    
+    #checa colisoes
+    colisoes = s.check_collision()
     for posicao, animais in colisoes:
         if 1000000 in posicao: 
             animais.clear()
@@ -171,24 +175,22 @@ while gameloop:
             if animais[0] == a3:
                 animais[0].make_sound()
                 animais[1].make_sound()
-                animais[1].matar() 
+                animais[1].kill() 
                 a3.setWeight(a3.getWeight()+animais[1].getWeight())
                 animais.clear()
                 mortes += 1
             elif animais[1] == a3:
                 animais[0].make_sound()
                 animais[1].make_sound()
-                animais[0].matar()
+                animais[0].kill()
                 a3.setWeight(a3.getWeight()+animais[0].getWeight())
                 animais.clear()
                 mortes += 1
-
         else:
             continue
-
+        
+        #loop para se o leão ganhar
         if mortes == 5:
-            print('ganhou')
-            a3.matar()
             while go: 
                 display.blit(win, (0, 0))
                 for event in pygame.event.get():
@@ -200,9 +202,8 @@ while gameloop:
                 fps.tick(60)
                 pygame.display.update()
         
+        #loop para se o leão perder
         if a3.getStamina() <= 0:
-            print('ganhou')
-            a3.matar()
             while goe: 
                 display.blit(over, (0, 0))
                 for event in pygame.event.get():
@@ -214,9 +215,5 @@ while gameloop:
                 fps.tick(60)
                 pygame.display.update()
             
-
-    
-    
-
     fps.tick(30)
     pygame.display.update()
